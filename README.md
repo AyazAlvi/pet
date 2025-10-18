@@ -7,13 +7,6 @@ It provides a **consistent, user-friendly interface** to install, remove, and li
 
 ---
 
-## 🎬 Demo
-
-![PET Demo](https://raw.githubusercontent.com/<username>/pet/main/demo.gif)
-*PET installing multiple packages, showing summary and skipping unavailable packages.*
-
----
-
 ## ⚡ Features
 
 ✅ Detects your system package manager automatically (`dnf` or `apt`)
