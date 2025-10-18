@@ -115,3 +115,12 @@ This project is licensed under the [MIT License](LICENSE).
 * Use `-y` for automation in scripts.
 * PET handles multiple packages intelligently and skips unavailable ones automatically.
 * Always run `pet list` to verify installations.
+
+
+## Todo
+
+* Container support (Ubuntu on Fedora and vice versa)
+* Support for AppImages
+* Support for alien package conversion
+* Support for repos with tar.gz packages (Github and custom links).
+* Snap, or at least flatpak support
