@@ -17,11 +17,17 @@ It provides a **consistent, user-friendly interface** to install, remove, and li
 ## ⚡ Features
 
 ✅ Detects your system package manager automatically (`dnf` or `apt`)
+
 ✅ Install or remove **multiple packages at once**
+
 ✅ **Automatically skip unavailable packages**
+
 ✅ Supports `-y` for **automatic confirmation**
+
 ✅ Aliases: `add` = `install`, `uninstall` = `remove`
+
 ✅ Fully integrates with **system package managers**, showing real download info
+
 
 ---
 
@@ -30,7 +36,7 @@ It provides a **consistent, user-friendly interface** to install, remove, and li
 Install PET with a single command:
 
 ```bash
-curl -sSL https://raw.githubusercontent.com/<username>/pet/main/install.sh | bash
+curl -sSL https://raw.githubusercontent.com/ayazalvi/pet/main/install.sh | bash
 ```
 
 This will install PET globally at `/usr/local/bin/pet`.
