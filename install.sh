@@ -6,7 +6,7 @@
 set -e
 
 # Define GitHub raw URL for the PET script
-PET_URL="https://raw.githubusercontent.com/<username>/pet/main/pet"
+PET_URL="https://raw.githubusercontent.com/ayazalvi/pet/main/pet"
 
 # Define install path
 INSTALL_PATH="/usr/local/bin/pet"
