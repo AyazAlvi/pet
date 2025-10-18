@@ -1,0 +1,117 @@
+#!/bin/bash
+# ==========================================
+# PET - Package Environment Tool
+# Cross-distro package manager wrapper
+# Supports DNF + APT
+# ==========================================
+
+set -e
+
+# Detect package manager
+if command -v dnf &>/dev/null; then
+    PM="dnf"
+elif command -v apt &>/dev/null; then
+    PM="apt"
+else
+    echo "❌ No supported package manager found (dnf or apt)."
+    exit 1
+fi
+
+# Display help
+show_help() {
+    echo "🐾 PET - Package Environment Tool"
+    echo ""
+    echo "Usage:"
+    echo "  pet install <package(s)> [-y] [--skip-unavailable]   Install package(s)"
+    echo "  pet add <package(s)> [-y] [--skip-unavailable]       Same as install"
+    echo "  pet remove <package(s)> [-y]                         Uninstall package(s)"
+    echo "  pet uninstall <package(s)> [-y]                      Same as remove"
+    echo "  pet list                                             List installed packages"
+    echo ""
+    echo "Examples:"
+    echo "  pet install htop neofetch tree -y"
+    echo "  pet install nano fakepkg --skip-unavailable"
+    echo "  pet remove htop neofetch -y"
+    echo "  pet list"
+}
+
+# No arguments
+if [ $# -lt 1 ]; then
+    show_help
+    exit 1
+fi
+
+ACTION=$1
+shift
+
+# Parse args
+YES_FLAG=""
+SKIP_FLAG=""
+PACKAGES=()
+
+for arg in "$@"; do
+    case "$arg" in
+        -y)
+            YES_FLAG="-y"
+            ;;
+        --skip-unavailable)
+            SKIP_FLAG="--skip-unavailable"
+            ;;
+        *)
+            PACKAGES+=("$arg")
+            ;;
+    esac
+done
+
+# Perform actions
+case "$ACTION" in
+    install|add)
+        if [ ${#PACKAGES[@]} -eq 0 ]; then
+            echo "❌ No package(s) specified for installation."
+            exit 1
+        fi
+        echo "⚙️ Installing: ${PACKAGES[*]}"
+        if [ "$PM" = "dnf" ]; then
+            sudo dnf install $YES_FLAG $SKIP_FLAG "${PACKAGES[@]}"
+        else
+            # apt has no --skip-unavailable, so emulate it
+            for pkg in "${PACKAGES[@]}"; do
+                echo "➡️ Checking availability of '$pkg'..."
+                if apt-cache show "$pkg" >/dev/null 2>&1; then
+                    sudo apt install $YES_FLAG "$pkg"
+                else
+                    if [ -n "$SKIP_FLAG" ]; then
+                        echo "⚠️ Skipping unavailable package: $pkg"
+                        continue
+                    else
+                        echo "❌ Package '$pkg' not found. Use --skip-unavailable to ignore."
+                        exit 1
+                    fi
+                fi
+            done
+        fi
+        ;;
+    remove|uninstall)
+        if [ ${#PACKAGES[@]} -eq 0 ]; then
+            echo "❌ No package(s) specified for removal."
+            exit 1
+        fi
+        echo "🗑️ Removing: ${PACKAGES[*]}"
+        if [ "$PM" = "dnf" ]; then
+            sudo dnf remove $YES_FLAG "${PACKAGES[@]}"
+        else
+            sudo apt remove $YES_FLAG "${PACKAGES[@]}"
+        fi
+        ;;
+    list)
+        echo "📦 Installed packages:"
+        if [ "$PM" = "dnf" ]; then
+            dnf list installed
+        else
+            apt list --installed
+        fi
+        ;;
+    *)
+        show_help
+        ;;
+esac
