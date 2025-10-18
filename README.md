@@ -1,6 +1,6 @@
 # 🐾 PET – Package Environment Tool
 
-[![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE) [![Platform](https://img.shields.io/badge/Platform-Linux-green.svg)](https://www.linux.org/) [![Shell](https://img.shields.io/badge/Shell-Bash-orange.svg)](https://www.gnu.org/software/bash/) [![GitHub Stars](https://img.shields.io/github/stars/<username>/pet?style=social)](https://github.com/<username>/pet/stargazers)
+[![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE) [![Platform](https://img.shields.io/badge/Platform-Linux-green.svg)](https://www.linux.org/) [![Shell](https://img.shields.io/badge/Shell-Bash-orange.svg)](https://www.gnu.org/software/bash/) [![GitHub Stars](https://img.shields.io/github/stars/ayazalvi/pet?style=social)](https://github.com/<username>/pet/stargazers)
 
 **PET** is a **cross-distro package manager wrapper** for Linux that works seamlessly with **DNF** (Fedora) and **APT** (Debian/Ubuntu).
 It provides a **consistent, user-friendly interface** to install, remove, and list packages across different Linux distributions.
