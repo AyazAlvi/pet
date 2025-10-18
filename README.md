@@ -1,24 +1,111 @@
-# pet
-A linux package manager to alias native package manager with easier flow.
+# 🐾 PET – Package Environment Tool
 
+[![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE) [![Platform](https://img.shields.io/badge/Platform-Linux-green.svg)](https://www.linux.org/) [![Shell](https://img.shields.io/badge/Shell-Bash-orange.svg)](https://www.gnu.org/software/bash/) [![GitHub Stars](https://img.shields.io/github/stars/<username>/pet?style=social)](https://github.com/<username>/pet/stargazers)
 
-🐾 PET (Package Environment Tool) is a lightweight and user-friendly wrapper for Linux package managers. It allows you to install, remove, and list packages seamlessly across Fedora (DNF) and Debian/Ubuntu (APT) systems.
+**PET** is a **cross-distro package manager wrapper** for Linux that works seamlessly with **DNF** (Fedora) and **APT** (Debian/Ubuntu).
+It provides a **consistent, user-friendly interface** to install, remove, and list packages across different Linux distributions.
 
-Key Features:
-- Supports both DNF and APT automatically
-- Install or remove multiple packages at once
-- Automatically skip unavailable packages
-- Summary report for multiple package operations (Installed / Skipped / Failed)
-- Supports -y for auto-confirmation
-- Simple, real Linux package manager experience
-- Aliases: add = install, uninstall = remove
+---
 
-Installation:
-    curl -sSL https://raw.githubusercontent.com/<username>/pet/main/install.sh | bash
+## 🎬 Demo
 
-Usage Examples:
-    pet install htop neofetch -y
-    pet remove htop neofetch -y
-    pet list
+![PET Demo](https://raw.githubusercontent.com/<username>/pet/main/demo.gif)
+*PET installing multiple packages, showing summary and skipping unavailable packages.*
 
-PET is perfect for Linux users who want a consistent cross-distro package management experience without switching commands.
+---
+
+## ⚡ Features
+
+✅ Detects your system package manager automatically (`dnf` or `apt`)
+✅ Install or remove **multiple packages at once**
+✅ **Automatically skip unavailable packages**
+✅ Supports `-y` for **automatic confirmation**
+✅ Aliases: `add` = `install`, `uninstall` = `remove`
+✅ Fully integrates with **system package managers**, showing real download info
+
+---
+
+## 🛠 Installation
+
+Install PET with a single command:
+
+```bash
+curl -sSL https://raw.githubusercontent.com/<username>/pet/main/install.sh | bash
+```
+
+This will install PET globally at `/usr/local/bin/pet`.
+Check version:
+
+```bash
+pet --version
+```
+
+---
+
+## 📦 Usage
+
+### Install Packages
+
+```bash
+# Install multiple packages with auto-confirm
+pet install htop neofetch tree -y
+
+# Using alias
+pet add vim nano curl
+```
+
+### Remove Packages
+
+```bash
+# Remove multiple packages
+pet remove htop neofetch -y
+
+# Using alias
+pet uninstall vim nano
+```
+
+### List Installed Packages
+
+```bash
+pet list
+```
+
+---
+
+## 💡 Examples
+
+```bash
+# Install multiple packages, skipping unavailable
+pet install git wget curl fakepkg -y
+
+# Remove multiple packages interactively
+pet remove vim nano
+
+# List all installed packages
+pet list
+```
+
+---
+
+## 🌐 Supported Systems
+
+| Distribution                 | Package Manager |
+| ---------------------------- | --------------- |
+| Fedora / CentOS / RHEL       | dnf             |
+| Debian / Ubuntu / Linux Mint | apt             |
+
+PET automatically selects the correct package manager for your system.
+
+---
+
+## 📜 License
+
+This project is licensed under the [MIT License](LICENSE).
+
+---
+
+## ⭐ Pro Tips
+
+* Use `-y` for automation in scripts.
+* PET handles multiple packages intelligently and skips unavailable ones automatically.
+* Always run `pet list` to verify installations.
